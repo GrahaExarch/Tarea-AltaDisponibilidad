@@ -1,20 +1,8 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -24,27 +12,28 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <v-card flat tile>
+      <v-toolbar dense>
+        <span>
+          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        </span>
+        <v-toolbar-title>
+          <router-link to="/" tag="span" style="cursor: pointer">
+            {{ title }}
+          </router-link>
+        </v-toolbar-title>
+        <v-spacer />
+        <v-row class="d-block">
+          <v-toolbar-items>
+            <v-col v-for="item in menuItems" :key="item.title">
+              <v-btn :to="item.path"> jajajauwu </v-btn>
+            </v-col>
+          </v-toolbar-items>
+        </v-row>
+      </v-toolbar>
+    </v-card>
     <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
+      <v-container><Nuxt /></v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
@@ -82,10 +71,15 @@ export default {
           to: '/inspire',
         },
       ],
+      menuItems: [
+        { title: 'Home', path: '/home', icon: 'home' },
+        { title: 'Sign Up', path: '/signup', icon: 'face' },
+        { title: 'Sign In', path: '/signin', icon: 'lock_open' },
+      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'Anime soy otaku xd',
     }
   },
 }
