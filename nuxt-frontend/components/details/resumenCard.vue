@@ -39,7 +39,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/detalle-review"> Modificar </v-btn>
+          <v-btn color="primary" nuxt to="/detalle/5"> Modificar </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>

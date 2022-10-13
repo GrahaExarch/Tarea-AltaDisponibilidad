@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from reviews.api import GetRating
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
+urlpatterns = [path('admin/', admin.site.urls), path('api/rating/get', GetRating.as_view())]
