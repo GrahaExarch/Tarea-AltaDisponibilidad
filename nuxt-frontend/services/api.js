@@ -3,4 +3,6 @@ export default ($axios)=>({
     )},
     getContents(){return $axios.$get('lista') },
     getTipoName(){return $axios.$get('tipos')} ,
+    postNewTipo(payload){return $axios.$post('nuevotipo',payload)},
+    postNewContenido(payload){return $axios.$post('nuevocontenido',payload)}
 })

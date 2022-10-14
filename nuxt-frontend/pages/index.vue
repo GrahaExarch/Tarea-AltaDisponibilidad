@@ -2,6 +2,7 @@
   <v-row justify="center">
     <ResumenCard
       v-for="(item, index) in datos"
+      :id="item.id"
       :key="index"
       :name="item.nombre"
       :description="item.detalle"

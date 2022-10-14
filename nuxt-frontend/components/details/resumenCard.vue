@@ -13,8 +13,8 @@
         <v-img
           class="pa-6"
           :lazy-src="imgroute"
-          max-height="960"
-          max-width="330"
+          height="400"
+          width="300"
           aspect-ratio="0.56"
           :src="imgroute"
         ></v-img>
@@ -40,7 +40,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/detalle/5"> Modificar </v-btn>
+          <v-btn color="primary" nuxt :to="`/detalle/${id}`"> Modificar </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -69,6 +69,10 @@ export default {
     imgroute: {
       type: String,
       default: '',
+    },
+    id: {
+      type: Number,
+      default: 0,
     },
   },
 }

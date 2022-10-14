@@ -33,8 +33,8 @@
               <v-img
                 class="pa-6 ma-2"
                 :lazy-src="imgroute"
-                max-height="960"
-                max-width="330"
+                max-height="500"
+                max-width="350"
                 aspect-ratio="0.56"
                 :src="imgroute"
               ></v-img>
@@ -90,6 +90,7 @@ export default {
     this.imgroute = this.data.urlimagen
     this.detalle = this.data.detalle
     this.rating = this.data.rating
+    this.tipo = this.data.idtipo
   },
   methods: {
     ...mapActions({

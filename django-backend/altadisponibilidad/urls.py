@@ -18,10 +18,14 @@ from django.urls import path
 from reviews.api import GetContents
 from reviews.api import GetRating
 from reviews.api import GetTiposName
+from reviews.api import NewContent
+from reviews.api import NewTipo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/rating/get', GetRating.as_view()),
     path('api/lista', GetContents.as_view()),
     path('api/tipos', GetTiposName.as_view()),
+    path('api/nuevotipo', NewTipo.as_view()),
+    path('api/nuevocontenido', NewContent.as_view()),
 ]

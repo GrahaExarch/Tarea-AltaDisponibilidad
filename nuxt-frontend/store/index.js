@@ -40,6 +40,26 @@ const actions = {
         } catch(error){
             return false
         }
+    },
+    async postNewTipo({commit},params){
+        try{
+            const request = await api(this.$axios).postNewTipo(params)
+            if (request.status){
+                return request
+            }
+        }catch(error){
+            return false
+        }
+    },
+    async postNewContenido({commit},params){
+        try{
+            const request = await api(this.$axios).postNewContenido(params)
+            if (request.status){
+                return request
+            }
+        }catch(error){
+            return false
+        }
     }
 }
 
