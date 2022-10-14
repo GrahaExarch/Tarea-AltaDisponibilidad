@@ -25,8 +25,9 @@
         <v-spacer />
         <v-row class="d-block">
           <v-toolbar-items>
-            <v-col v-for="item in menuItems" :key="item.title">
-              <v-btn :to="item.path"> jajajauwu </v-btn>
+            <v-spacer />
+            <v-col v-for="item in menuItems" :key="item.title" cols="auto">
+              <v-btn :to="item.path"> {{ item.title }} </v-btn>
             </v-col>
           </v-toolbar-items>
         </v-row>
@@ -59,27 +60,15 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
-        },
-      ],
+      items: [],
       menuItems: [
-        { title: 'Home', path: '/home', icon: 'home' },
-        { title: 'Sign Up', path: '/signup', icon: 'face' },
-        { title: 'Sign In', path: '/signin', icon: 'lock_open' },
+        { title: 'Nueva Plataforma', path: '/platform' },
+        { title: 'Eliminar', path: '/delete' },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Anime soy otaku xd',
+      title: 'Reviews de Todito',
     }
   },
 }

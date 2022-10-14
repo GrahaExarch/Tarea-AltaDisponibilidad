@@ -15,6 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from reviews.api import GetContents
 from reviews.api import GetRating
+from reviews.api import GetTiposName
 
-urlpatterns = [path('admin/', admin.site.urls), path('api/rating/get', GetRating.as_view())]
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/rating/get', GetRating.as_view()),
+    path('api/lista', GetContents.as_view()),
+    path('api/tipos', GetTiposName.as_view()),
+]

@@ -1,6 +1,5 @@
 <template>
   <v-form>
-    {{ data }}
     <v-col cols="auto" class="pa-4">
       <v-card>
         <v-card-title> Edicion</v-card-title>
@@ -10,25 +9,33 @@
               <v-text-field v-model="name" label="Nombre"></v-text-field>
             </v-col>
             <v-col cols="4">
-              <v-select :items="items" label="Plataforma"></v-select>
+              <v-select
+                v-model="tipo"
+                :items="items"
+                item-text="nombre"
+                item-value="id"
+                label="Plataforma"
+              ></v-select>
             </v-col>
             <v-col cols="4">
-              <v-text-field label="URL Imagen"></v-text-field>
+              <v-text-field v-model="imgroute" label="URL Imagen"></v-text-field>
             </v-col>
             <v-col cols="8">
               <v-textarea
+                v-model="detalle"
                 outlined
                 name="input-7-4"
                 label="Detalle"
-                value="Escribe una pequeña reseña"
+                item-value="detalle"
               ></v-textarea
             ></v-col>
             <v-col cols="4" align="center">
               <v-img
-                class="pa-6"
+                class="pa-6 ma-2"
                 :lazy-src="imgroute"
                 max-height="960"
-                max-width="320"
+                max-width="330"
+                aspect-ratio="0.56"
                 :src="imgroute"
               ></v-img>
             </v-col> </v-row
@@ -63,25 +70,31 @@ export default {
   data() {
     return {
       data: {},
-      listaReviews: null,
+      listatipos: {},
+      plataformas: [],
       items: [],
       imgroute: '',
       rating: 0,
       name: '',
+      tipo: '',
+      detalle: '',
     }
   },
   async mounted() {
-    console.log(this.$route.params)
     const payload = {
       id: this.$route.params.id,
     }
     this.data = await this.getRating(payload)
+    this.items = await this.getTipoName()
     this.name = this.data.nombre
     this.imgroute = this.data.urlimagen
+    this.detalle = this.data.detalle
+    this.rating = this.data.rating
   },
   methods: {
     ...mapActions({
       getRating: 'getRating',
+      getTipoName: 'getTipoName',
     }),
     imprimir(texto) {
       return texto

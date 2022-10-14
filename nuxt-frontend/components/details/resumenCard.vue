@@ -14,7 +14,8 @@
           class="pa-6"
           :lazy-src="imgroute"
           max-height="960"
-          max-width="320"
+          max-width="330"
+          aspect-ratio="0.56"
           :src="imgroute"
         ></v-img>
         <v-card-text>

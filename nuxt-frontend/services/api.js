@@ -1,3 +1,6 @@
 export default ($axios)=>({
-    getRating(params){return $axios.$get('rating/get',{params:{id:params.id}})} 
+    getRating(params){return $axios.$get('rating/get',{params:{id:params.id}}
+    )},
+    getContents(){return $axios.$get('lista') },
+    getTipoName(){return $axios.$get('tipos')} ,
 })
