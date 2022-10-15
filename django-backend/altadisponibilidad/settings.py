@@ -83,8 +83,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'altadisp',
         'USER': 'postgres',
-        'PASSWORD': 'sql',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

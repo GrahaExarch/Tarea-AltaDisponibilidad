@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-col cols="auto" class="pa-4">
-      <v-card align="center">
+      <v-card align="center" width="300">
         <v-card-title class="headline"> {{ name }} </v-card-title>
         <footer align="left">
           <small>

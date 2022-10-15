@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: ./django-backend
+      dockerfile: Dockerfile
+    command: >-
+      bash -c "python manage.py migrate reviews && python /TareaAltaDisp/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./django-backend:/TareaAltaDisp
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 60s
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432    
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./postgres_data:/var/lib/postgresql/postgres_data/
+      - ./postgres_data:/docker-entrypoint-initdb.d
+  front:
+    build:
+      context: ./nuxt-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./nuxt-frontend:/TareaAltaDisp
+    ports:
+      - 3000:3000
+    depends_on:
+      - web
+      - db
+
+
+volumes:
+  postgres_data:
