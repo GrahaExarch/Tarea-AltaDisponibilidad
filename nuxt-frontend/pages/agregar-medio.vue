@@ -89,7 +89,7 @@ export default {
       getTipoName: 'getTipoName',
       postNewContenido: 'postNewContenido',
     }),
-    createNewContent() {
+    async createNewContent() {
       const payload = {
         name: this.name,
         type: this.tipo,
@@ -97,7 +97,8 @@ export default {
         imgroute: this.imgroute,
         rating: this.rating,
       }
-      this.postNewContenido(payload)
+      await this.postNewContenido(payload)
+      this.$router.push('/')
     },
   },
 }

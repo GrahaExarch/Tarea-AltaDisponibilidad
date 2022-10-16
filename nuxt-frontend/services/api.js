@@ -4,5 +4,7 @@ export default ($axios)=>({
     getContents(){return $axios.$get('lista') },
     getTipoName(){return $axios.$get('tipos')} ,
     postNewTipo(payload){return $axios.$post('nuevotipo',payload)},
-    postNewContenido(payload){return $axios.$post('nuevocontenido',payload)}
+    postNewContenido(payload){return $axios.$post('nuevocontenido',payload)},
+    deleteContenido(payload){return $axios.$delete('borrar',payload)},
+    updateContenido(payload){return $axios.$put('actualizar',payload)},
 })

@@ -49,3 +49,39 @@ class NewContent(APIView):
             {"status": True},
             status=status.HTTP_200_OK,
         )
+
+
+class DeleteContent(APIView):
+    def delete(self, request):
+        try:
+            idContenido = request.data.get('id')
+            borrarcontenido = Contenido.objects.get(id=idContenido)
+            borrarcontenido.delete()
+        except Exception as e:
+            print(e)
+            return JsonResponse({"status": False}, status=status.HTTP_200_OK)
+        return JsonResponse(
+            {"status": True},
+            status=status.HTTP_200_OK,
+        )
+
+
+class UpdateContent(APIView):
+    def put(self, request):
+        try:
+            idContenido = request.data.get('id')
+            updatecontenido = Contenido.objects.get(id=idContenido)
+            tipo = Tipo.objects.get(id=request.data.get('type'))
+            updatecontenido.nombre = request.data.get('name')
+            updatecontenido.idtipo = tipo
+            updatecontenido.urlimagen = request.data.get('imgroute')
+            updatecontenido.rating = request.data.get('rating')
+            updatecontenido.detalle = request.data.get('detail')
+            updatecontenido.save()
+        except Exception as e:
+            print(e)
+            return JsonResponse({"status": False}, status=status.HTTP_200_OK)
+        return JsonResponse(
+            {"status": True},
+            status=status.HTTP_200_OK,
+        )

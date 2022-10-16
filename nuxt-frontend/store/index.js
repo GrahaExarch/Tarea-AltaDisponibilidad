@@ -60,7 +60,28 @@ const actions = {
         }catch(error){
             return false
         }
+    },
+    async deleteContenido({commit},params){
+        try{
+            const request = await api(this.$axios).deleteContenido(params)
+            if (request.status){
+                return request
+            }
+        }catch(error){
+            return false
+        }
+    },
+    async updateContenido({commit},params){
+        try{
+            const request = await api(this.$axios).updateContenido(params)
+            if (request.status){
+                return request
+            }
+        }catch(error){
+            return false
+        }
     }
+
 }
 
 const mutations= {}

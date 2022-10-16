@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from reviews.api import DeleteContent
 from reviews.api import GetContents
 from reviews.api import GetRating
 from reviews.api import GetTiposName
 from reviews.api import NewContent
 from reviews.api import NewTipo
+from reviews.api import UpdateContent
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +30,6 @@ urlpatterns = [
     path('api/tipos', GetTiposName.as_view()),
     path('api/nuevotipo', NewTipo.as_view()),
     path('api/nuevocontenido', NewContent.as_view()),
+    path('api/actualizar',UpdateContent.as_view()),
+    path('api/borrar',DeleteContent.as_view()),
 ]

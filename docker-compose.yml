@@ -40,6 +40,5 @@ services:
       - web
       - db
 
-
 volumes:
   postgres_data:

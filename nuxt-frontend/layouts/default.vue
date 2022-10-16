@@ -19,7 +19,7 @@
       </v-toolbar>
     </v-card>
     <v-main>
-      <v-container><Nuxt /></v-container>
+      <v-container style="width: 100%"><Nuxt /></v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
       <v-list>
@@ -46,10 +46,7 @@ export default {
       drawer: false,
       fixed: false,
       items: [],
-      menuItems: [
-        { title: 'Nueva Plataforma', path: '/platform' },
-        { title: 'Eliminar', path: '/delete' },
-      ],
+      menuItems: [{ title: 'Nueva Plataforma', path: '/platform' }],
       miniVariant: false,
       right: true,
       rightDrawer: false,

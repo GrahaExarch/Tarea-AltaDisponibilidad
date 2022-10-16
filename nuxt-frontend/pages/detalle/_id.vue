@@ -2,7 +2,7 @@
   <v-form>
     <v-col cols="auto" class="pa-4">
       <v-card>
-        <v-card-title> Edicion</v-card-title>
+        <v-card-title>Edicion</v-card-title>
         <v-card-text class="mx-4"
           ><v-row class="pa-4">
             <v-col cols="4">
@@ -57,10 +57,33 @@
         ></v-card-text>
         <v-card-actions
           ><v-spacer />
-          <v-btn color="primary" nuxt to="/detalle-review"> Guardar </v-btn></v-card-actions
+          <v-btn color="error" @click="deleteModal = true">Eliminar</v-btn>
+          <v-btn color="primary" @click="actualizarContenido()"> Actualizar </v-btn></v-card-actions
         >
       </v-card>
     </v-col>
+    <v-dialog v-model="deleteModal" width="370">
+      <v-card>
+        <v-card-title class="text-h5 text-center">
+          ¿Estás seguro que quiere borrar {{ name }}?
+        </v-card-title>
+
+        <v-card-text> Está acción no podrá ser revertida. </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-actions>
+          <v-col>
+            <v-row>
+              <v-btn color="primary" block @click="eliminarContenido()"> Confirmar </v-btn>
+            </v-row>
+            <v-row>
+              <v-btn color="primary" text block @click="deleteModal = false"> Cerrar </v-btn>
+            </v-row>
+          </v-col>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-form>
 </template>
 
@@ -78,6 +101,7 @@ export default {
       name: '',
       tipo: '',
       detalle: '',
+      deleteModal: false,
     }
   },
   async mounted() {
@@ -96,9 +120,27 @@ export default {
     ...mapActions({
       getRating: 'getRating',
       getTipoName: 'getTipoName',
+      updateContenido: 'updateContenido',
+      deleteContenido: 'deleteContenido',
     }),
-    imprimir(texto) {
-      return texto
+    async actualizarContenido() {
+      const payloadupdate = {
+        id: this.$route.params.id,
+        name: this.name,
+        type: this.tipo,
+        detail: this.detalle,
+        imgroute: this.imgroute,
+        rating: this.rating,
+      }
+      await this.updateContenido(payloadupdate)
+      this.$router.push('/')
+    },
+    async eliminarContenido() {
+      const payloaddelete = {
+        data: { id: this.$route.params.id },
+      }
+      await this.deleteContenido(payloaddelete)
+      this.$router.push('/')
     },
   },
 }

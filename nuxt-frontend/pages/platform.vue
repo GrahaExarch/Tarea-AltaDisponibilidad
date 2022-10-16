@@ -33,11 +33,12 @@ export default {
       postNewTipo: 'postNewTipo',
       getTipoName: 'getTipoName',
     }),
-    createNewTipo() {
+    async createNewTipo() {
       const payload = {
         name: this.name,
       }
-      this.postNewTipo(payload)
+      await this.postNewTipo(payload)
+      this.$router.push('/')
     },
   },
 }
