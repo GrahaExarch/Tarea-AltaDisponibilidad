@@ -1,17 +1,24 @@
 version: '3.8'
+#Se definen los servicios web, db y front.
 services:
   web:
+    #Se dice que se construya el servicio usando el Dockerfile ubicado en /django-backend
     build:
       context: ./django-backend
       dockerfile: Dockerfile
+    #Se ejecuta el python manange runserver por la linea de comando (Ademas del migrate)
     command: >-
       bash -c "python manage.py migrate reviews && python /TareaAltaDisp/manage.py runserver 0.0.0.0:8000"
+    #Se carga el volumen en django-backend
     volumes:
       - ./django-backend:/TareaAltaDisp
+    #Se enlaza el puerto del container al puerto del computador
     ports:
       - 8000:8000
+    #Se indica que no se puede ejecutar hasta que se este construyendo db (no espera a que termine)
     depends_on:
       - db
+    #Por lo anterior, se agrega esta restar_policy, dado que si la bd no esta creada, el runserver se cae
     deploy:
       restart_policy:
         condition: on-failure
@@ -19,26 +26,33 @@ services:
         max_attempts: 3
         window: 60s
   db:
+    #Se construye utilizando la imagen publica de postgres
     image: postgres
+    #Se asigna la variable de entorno a la clave de postgres
     environment:
       POSTGRES_PASSWORD: postgres
+    #Se enlaza el puerto del container al puerto del computador, se usa el 5433 para diferenciarla de otra bd existente
     ports:
-      - 5433:5432    
+      - 5433:5432
+    #Se montan los volumenes para manter datos y tambien para cargar de manera automatica un dump de la bd
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./postgres_data:/var/lib/postgresql/postgres_data/
       - ./postgres_data:/docker-entrypoint-initdb.d
   front:
+    #Se dice que se construya el servicio usando el Dockerfile ubicado en /nuxt-frontend
     build:
       context: ./nuxt-frontend
       dockerfile: Dockerfile
     volumes:
       - ./nuxt-frontend:/TareaAltaDisp
+    #Se enlaza el puerto del container al puerto del computador
     ports:
       - 3000:3000
+    #Se le dice al servicio que depende de web y db, basicamente es el ultimo en iniciarse
     depends_on:
       - web
       - db
-
+#Se monta el volumen de postgres_data
 volumes:
   postgres_data:
