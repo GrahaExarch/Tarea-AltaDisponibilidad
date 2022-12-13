@@ -30,6 +30,6 @@ urlpatterns = [
     path('api/tipos', GetTiposName.as_view()),
     path('api/nuevotipo', NewTipo.as_view()),
     path('api/nuevocontenido', NewContent.as_view()),
-    path('api/actualizar',UpdateContent.as_view()),
-    path('api/borrar',DeleteContent.as_view()),
+    path('api/actualizar', UpdateContent.as_view()),
+    path('api/borrar', DeleteContent.as_view()),
 ]
